@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4c84FF</color>
+    <color name="colorPrimary">#212121</color>
     <color name="colorPrimaryDark">#000</color>
     <color name="colorAccent">#7D53C6</color>
 
     <!--background color-->
-    <color name="colorCalculatorBackground">#FFFFFF</color>
-    <color name="colorOperationBackground">#EEEEF5</color>
+    <color name="colorCalculatorBackground">#24272F</color>
+    <color name="colorOperationBackground">#302E45</color>
 
     <!--button color-->
     <color name="colorButtonBackground">#7962CD</color>
     <color name="colorButtonBackgroundPressed">#866CE3</color>
 
     <!--divider color-->
-    <color name="divider">#F4F6F6</color>
+    <color name="divider">#31333C</color>
 
     <!--output color-->
-    <color name="colorText">#CDCDCD</color>
-    <color name="colorTextLight">#7761CD</color>
+    <color name="colorText">#A9A9AA</color>
+    <color name="colorTextLight">#F8F8FA</color>
 
     <!--input color-->
-    <color name="colorIcon">#C3BCE5</color>
-    <color name="colorTextKeypad">#5D5D6F</color>
+    <color name="colorIcon">#D3D5D3</color>
+    <color name="colorTextKeypad">#D4D5D7</color>
 </resources>
