@@ -1,7 +1,6 @@
 package com.jakode.calculator
 
 import android.os.Bundle
-import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
@@ -34,11 +33,6 @@ class MainActivity : AppCompatActivity() {
         binding.key9.setOnClickListener { binding.calculatorOutput.addItem("9") }
 
         binding.keyClear.setOnClickListener { binding.calculatorOutput.clear() }
-        binding.keyRemove.setOnClickListener { binding.calculatorOutput.removeItem() }
-        binding.keyRemove.setOnLongClickListener {
-            binding.calculatorOutput.clear()
-            true
-        }
         binding.keyEqual.setOnClickListener { binding.calculatorOutput.solve() }
 
         binding.keySum.setOnClickListener { binding.calculatorOutput.addItem("+") }
@@ -53,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         return super.onTouchEvent(event)
     }
 
+    // gesture
     private class MyGestureListener(private val binding: ActivityMainBinding) :
         GestureDetector.SimpleOnGestureListener() {
         override fun onFling(
@@ -66,27 +61,21 @@ class MainActivity : AppCompatActivity() {
             val diffX = event2.x - event1.x
             if (abs(diffX) > abs(diffY)) {
                 if (abs(diffX) > SWIPE_THRESHOLD && abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-                    if (diffX > 0) {
-                        onSwipeRight()
-                    } else {
+                    if (diffX <= 0) {
                         onSwipeLeft()
                     }
                     result = true
                 }
-            } else if (abs(diffY) > SWIPE_THRESHOLD && abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
-                if (diffY > 0) {
-                    onSwipeBottom()
-                } else {
-                    onSwipeTop()
-                }
-                result = true
             }
             return result
         }
 
-        private fun onSwipeRight() = Log.i("Swipe", "onSwipeRight")
+        // long press clear output
+        override fun onLongPress(event: MotionEvent?) {
+            binding.calculatorOutput.clear()
+        }
+
+        // swipe left remove item output
         private fun onSwipeLeft() = binding.calculatorOutput.removeItem()
-        private fun onSwipeTop() = Log.i("Swipe", "onSwipeTop")
-        private fun onSwipeBottom() = Log.i("Swipe", "onSwipeBottom")
     }
 }

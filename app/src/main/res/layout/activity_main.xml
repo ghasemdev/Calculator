@@ -48,26 +48,12 @@
                 android:id="@+id/history"
                 android:layout_width="@dimen/sizeIcon"
                 android:layout_height="@dimen/sizeIcon"
-                android:layout_marginStart="16dp"
                 app:icon="@drawable/ic_history_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.1"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toTopOf="parent">
 
             </com.jakode.calculator.CalculatorInputView>
-
-            <com.jakode.calculator.CalculatorInputView
-                android:id="@+id/key_remove"
-                android:layout_width="@dimen/sizeIcon"
-                android:layout_height="@dimen/sizeIcon"
-                android:layout_marginEnd="16dp"
-                android:padding="2dp"
-                app:icon="@drawable/ic_backspace_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.91"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -354,6 +340,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.16" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
