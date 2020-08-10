@@ -71,4 +71,8 @@ class CalculatorInputView(context: Context, attributeSet: AttributeSet?) :
     override fun setOnClickListener(l: OnClickListener?) {
         input_element_click.setOnClickListener(l)
     }
+
+    override fun setOnLongClickListener(l: OnLongClickListener?) {
+        input_element_click.setOnLongClickListener(l)
+    }
 }
