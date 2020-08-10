@@ -17,7 +17,7 @@
         android:padding="16dp"
         android:textColor="@color/colorText"
         android:textSize="@dimen/textSizeCalculationEquation"
-        android:text="789+456+12" />
+        tools:text="789+456+12" />
 
     <View
         android:layout_width="match_parent"
@@ -36,5 +36,5 @@
         android:padding="16dp"
         android:textColor="@color/colorTextLight"
         android:textSize="@dimen/textSizeCalculationOutcome"
-        android:text="1'257" />
+        tools:text="1'257" />
 </merge>
