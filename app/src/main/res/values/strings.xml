@@ -14,8 +14,8 @@
     <string name="key_9">9</string>
 
     <!--operation-->
-    <string name="key_sum">–</string>
-    <string name="key_sub">=</string>
+    <string name="key_sum">+</string>
+    <string name="key_sub">–</string>
     <string name="key_mul">×</string>
     <string name="key_div">÷</string>
 
