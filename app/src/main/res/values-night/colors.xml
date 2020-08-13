@@ -22,4 +22,6 @@
     <!--input color-->
     <color name="colorIcon">#D3D5D3</color>
     <color name="colorTextKeypad">#D4D5D7</color>
+
+    <color name="spotlightBackground">#BF272727</color>
 </resources>

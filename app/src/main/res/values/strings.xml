@@ -23,6 +23,11 @@
     <string name="key_braces">( )</string>
     <string name="key_percentage">%</string>
     <string name="key_negative">+/–</string>
-    <string name="key_decimal">,</string>
+    <string name="key_decimal">.</string>
     <string name="key_equals">=</string>
+
+    <!--guidance-->
+    <string name="skip">Skip</string>
+    <string name="swipe_left">Swipe left to remove item</string>
+    <string name="long_touch">Long touch to clear calculations</string>
 </resources>

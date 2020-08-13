@@ -3,17 +3,24 @@ package com.jakode.calculator
 import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
+import androidx.core.view.doOnPreDraw
 import com.jakode.calculator.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.math.abs
 
-private const val SWIPE_THRESHOLD = 100
-private const val SWIPE_VELOCITY_THRESHOLD = 100
-
 class MainActivity : AppCompatActivity() {
+    companion object {
+        private const val SWIPE_THRESHOLD = 100
+        private const val SWIPE_VELOCITY_THRESHOLD = 100
+    }
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var mDetector: GestureDetectorCompat
+    private var guidance: Guidance? = null
+    private var swipeLeft = false // guidance
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +47,26 @@ class MainActivity : AppCompatActivity() {
         binding.keyMul.setOnClickListener { binding.calculatorOutput.addItem("×") }
         binding.keyDiv.setOnClickListener { binding.calculatorOutput.addItem("÷") }
         binding.keyPercentage.setOnClickListener { binding.calculatorOutput.addItem("%") }
+
+        // guidance for clear calculate
+        guidance = Guidance(this)
+        binding.root.doOnPreDraw {
+            if (guidance!!.first) {
+                guidance?.apply {
+                    add(R.layout.layout_target_swipe_left, calculator_output, 0F, false)
+                    add(R.layout.layout_target_long_touch, calculator_output, 0F, false)
+                    start()
+                }
+                guidance!!.targets.forEach {
+                    it.overlay?.apply {
+                        findViewById<View>(R.id.skip)?.setOnClickListener {
+                            guidance!!.finish()
+                            guidance!!.first = false
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -48,7 +75,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // gesture
-    private class MyGestureListener(private val binding: ActivityMainBinding) :
+    private inner class MyGestureListener(private val binding: ActivityMainBinding) :
         GestureDetector.SimpleOnGestureListener() {
         override fun onFling(
             event1: MotionEvent?,
@@ -73,9 +100,21 @@ class MainActivity : AppCompatActivity() {
         // long press clear output
         override fun onLongPress(event: MotionEvent?) {
             binding.calculatorOutput.clear()
+            // guidance show first time
+            if (guidance?.first!! && swipeLeft) {
+                guidance?.next()
+                guidance!!.first = false
+            }
         }
 
         // swipe left remove item output
-        private fun onSwipeLeft() = binding.calculatorOutput.removeItem()
+        private fun onSwipeLeft() {
+            binding.calculatorOutput.removeItem()
+            // guidance show first time
+            if (guidance?.first!! && !swipeLeft) {
+                guidance?.next()
+                swipeLeft = true
+            }
+        }
     }
 }
