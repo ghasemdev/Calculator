@@ -19,336 +19,346 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_menu" />
 
-    <LinearLayout
+    <com.jakode.calculator.calculatorOutput.CalculatorOutputView
+        android:id="@+id/calculator_output"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="4" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/calculator_output"
+        app:layout_constraintVertical_weight="6">
 
-        <com.jakode.calculator.calculatorOutput.CalculatorOutputView
-            android:id="@+id/calculator_output"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        <com.jakode.calculator.CalculatorInputView
+            android:id="@+id/history"
+            android:layout_width="@dimen/sizeIcon"
+            android:layout_height="@dimen/sizeIcon"
+            app:icon="@drawable/ic_history_24"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.jakode.calculator.CalculatorInputView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="4">
+            android:id="@+id/buttons"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider">
 
-            <com.jakode.calculator.CalculatorInputView
-                android:id="@+id/history"
-                android:layout_width="@dimen/sizeIcon"
-                android:layout_height="@dimen/sizeIcon"
-                app:icon="@drawable/ic_history_24"
-                app:layout_constraintEnd_toStartOf="@+id/guideline"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toTopOf="parent">
-
-            </com.jakode.calculator.CalculatorInputView>
-
-            <LinearLayout
-                android:id="@+id/linearLayout"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/keypad"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                android:weightSum="4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/operations"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.jakode.calculator.CalculatorInputView
+                    android:id="@+id/key_clear"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:color_text="@color/colorTextLight"
+                    app:layout_constraintBottom_toTopOf="@+id/key_7"
+                    app:layout_constraintEnd_toStartOf="@+id/key_braces"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:text="@string/key_clear" />
+
+                <com.jakode.calculator.CalculatorInputView
+                    android:id="@+id/key_braces"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:color_text="@color/colorTextLight"
+                    app:layout_constraintBottom_toTopOf="@+id/key_8"
+                    app:layout_constraintEnd_toStartOf="@+id/key_percentage"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/key_clear"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:text="@string/key_braces" />
+
+                <com.jakode.calculator.CalculatorInputView
+                    android:id="@+id/key_percentage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:color_text="@color/colorTextLight"
+                    app:layout_constraintBottom_toTopOf="@+id/key_9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/key_braces"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:text="@string/key_percentage" />
+
+                <com.jakode.calculator.CalculatorInputView
+                    android:id="@+id/key_7"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/key_4"
+                    app:layout_constraintEnd_toStartOf="@+id/key_8"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/key_clear"
+                    app:text="@string/key_7" />
+
+                <com.jakode.calculator.CalculatorInputView
+                    android:id="@+id/key_8"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/key_5"
+                    app:layout_constraintEnd_toStartOf="@+id/key_9"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/key_7"
+                    app:layout_constraintTop_toBottomOf="@+id/key_braces"
+                    app:text="@string/key_8" />
+
+                <com.jakode.calculator.CalculatorInputView
+                    android:id="@+id/key_9"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/key_6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/key_8"
+                    app:layout_constraintTop_toBottomOf="@+id/key_percentage"
+                    app:text="@string/key_9" />
+
+                <com.jakode.calculator.CalculatorInputView
+                    android:id="@+id/key_4"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/key_1"
+                    app:layout_constraintEnd_toStartOf="@+id/key_5"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/key_7"
+                    app:text="@string/key_4" />
+
+                <com.jakode.calculator.CalculatorInputView
+                    android:id="@+id/key_5"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/key_2"
+                    app:layout_constraintEnd_toStartOf="@+id/key_6"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/key_4"
+                    app:layout_constraintTop_toBottomOf="@+id/key_8"
+                    app:text="@string/key_5" />
+
+                <com.jakode.calculator.CalculatorInputView
+                    android:id="@+id/key_6"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/key_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/key_5"
+                    app:layout_constraintTop_toBottomOf="@+id/key_9"
+                    app:text="@string/key_6" />
+
+                <com.jakode.calculator.CalculatorInputView
+                    android:id="@+id/key_1"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/key_negative"
+                    app:layout_constraintEnd_toStartOf="@+id/key_2"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/key_4"
+                    app:text="@string/key_1" />
+
+                <com.jakode.calculator.CalculatorInputView
+                    android:id="@+id/key_2"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/key_0"
+                    app:layout_constraintEnd_toStartOf="@+id/key_3"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/key_1"
+                    app:layout_constraintTop_toBottomOf="@+id/key_5"
+                    app:text="@string/key_2" />
+
+                <com.jakode.calculator.CalculatorInputView
+                    android:id="@+id/key_3"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/key_decimal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/key_2"
+                    app:layout_constraintTop_toBottomOf="@+id/key_6"
+                    app:text="@string/key_3" />
+
+                <com.jakode.calculator.CalculatorInputView
+                    android:id="@+id/key_negative"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/key_0"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/key_1"
+                    app:text="@string/key_negative" />
+
+                <com.jakode.calculator.CalculatorInputView
+                    android:id="@+id/key_0"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/key_decimal"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/key_negative"
+                    app:layout_constraintTop_toBottomOf="@+id/key_2"
+                    app:text="@string/key_0" />
+
+                <com.jakode.calculator.CalculatorInputView
+                    android:id="@+id/key_decimal"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/key_0"
+                    app:layout_constraintTop_toBottomOf="@+id/key_3"
+                    app:text="@string/key_decimal" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/operations"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider">
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/keypad"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/keypad"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:id="@+id/basic_operations"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:layout_marginTop="8dp"
-                    android:layout_weight="1">
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/operations_background"
+                    app:layout_constraintBottom_toTopOf="@+id/key_equal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_weight="4">
 
                     <com.jakode.calculator.CalculatorInputView
-                        android:id="@+id/key_clear"
+                        android:id="@+id/key_div"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         app:color_text="@color/colorTextLight"
-                        app:layout_constraintBottom_toTopOf="@+id/key_7"
-                        app:layout_constraintEnd_toStartOf="@+id/key_braces"
+                        app:layout_constraintBottom_toTopOf="@+id/key_mul"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:text="@string/key_clear" />
+                        app:text="@string/key_div" />
 
                     <com.jakode.calculator.CalculatorInputView
-                        android:id="@+id/key_braces"
+                        android:id="@+id/key_mul"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         app:color_text="@color/colorTextLight"
-                        app:layout_constraintBottom_toTopOf="@+id/key_8"
-                        app:layout_constraintEnd_toStartOf="@+id/key_percentage"
+                        app:layout_constraintBottom_toTopOf="@+id/key_sub"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/key_clear"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:text="@string/key_braces" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/key_div"
+                        app:text="@string/key_mul" />
 
                     <com.jakode.calculator.CalculatorInputView
-                        android:id="@+id/key_percentage"
+                        android:id="@+id/key_sub"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         app:color_text="@color/colorTextLight"
-                        app:layout_constraintBottom_toTopOf="@+id/key_9"
+                        app:layout_constraintBottom_toTopOf="@+id/key_sum"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/key_braces"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:text="@string/key_percentage" />
-
-                    <com.jakode.calculator.CalculatorInputView
-                        android:id="@+id/key_7"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/key_4"
-                        app:layout_constraintEnd_toStartOf="@+id/key_8"
-                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/key_clear"
-                        app:text="@string/key_7" />
+                        app:layout_constraintTop_toBottomOf="@+id/key_mul"
+                        app:text="@string/key_sub" />
 
                     <com.jakode.calculator.CalculatorInputView
-                        android:id="@+id/key_8"
+                        android:id="@+id/key_sum"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/key_5"
-                        app:layout_constraintEnd_toStartOf="@+id/key_9"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/key_7"
-                        app:layout_constraintTop_toBottomOf="@+id/key_braces"
-                        app:text="@string/key_8" />
-
-                    <com.jakode.calculator.CalculatorInputView
-                        android:id="@+id/key_9"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/key_6"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/key_8"
-                        app:layout_constraintTop_toBottomOf="@+id/key_percentage"
-                        app:text="@string/key_9" />
-
-                    <com.jakode.calculator.CalculatorInputView
-                        android:id="@+id/key_4"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/key_1"
-                        app:layout_constraintEnd_toStartOf="@+id/key_5"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/key_7"
-                        app:text="@string/key_4" />
-
-                    <com.jakode.calculator.CalculatorInputView
-                        android:id="@+id/key_5"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/key_2"
-                        app:layout_constraintEnd_toStartOf="@+id/key_6"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/key_4"
-                        app:layout_constraintTop_toBottomOf="@+id/key_8"
-                        app:text="@string/key_5" />
-
-                    <com.jakode.calculator.CalculatorInputView
-                        android:id="@+id/key_6"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/key_3"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/key_5"
-                        app:layout_constraintTop_toBottomOf="@+id/key_9"
-                        app:text="@string/key_6" />
-
-                    <com.jakode.calculator.CalculatorInputView
-                        android:id="@+id/key_1"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/key_negative"
-                        app:layout_constraintEnd_toStartOf="@+id/key_2"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/key_4"
-                        app:text="@string/key_1" />
-
-                    <com.jakode.calculator.CalculatorInputView
-                        android:id="@+id/key_2"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/key_0"
-                        app:layout_constraintEnd_toStartOf="@+id/key_3"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/key_1"
-                        app:layout_constraintTop_toBottomOf="@+id/key_5"
-                        app:text="@string/key_2" />
-
-                    <com.jakode.calculator.CalculatorInputView
-                        android:id="@+id/key_3"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/key_decimal"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/key_2"
-                        app:layout_constraintTop_toBottomOf="@+id/key_6"
-                        app:text="@string/key_3" />
-
-                    <com.jakode.calculator.CalculatorInputView
-                        android:id="@+id/key_negative"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/key_0"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/key_1"
-                        app:text="@string/key_negative" />
-
-                    <com.jakode.calculator.CalculatorInputView
-                        android:id="@+id/key_0"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/key_decimal"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/key_negative"
-                        app:layout_constraintTop_toBottomOf="@+id/key_2"
-                        app:text="@string/key_0" />
-
-                    <com.jakode.calculator.CalculatorInputView
-                        android:id="@+id/key_decimal"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        app:color_text="@color/colorTextLight"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/key_0"
-                        app:layout_constraintTop_toBottomOf="@+id/key_3"
-                        app:text="@string/key_decimal" />
-
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/key_sub"
+                        app:text="@string/key_sum" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="3"
-                    android:orientation="vertical"
-                    android:weightSum="5">
+                <Button
+                    android:id="@+id/key_equal"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/equals_background"
+                    android:text="@string/key_equals"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="34sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/basic_operations"
+                    app:layout_constraintVertical_weight="1" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/operations"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/operations_background"
-                        tools:ignore="NestedWeights">
-
-                        <com.jakode.calculator.CalculatorInputView
-                            android:id="@+id/key_div"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:color_text="@color/colorTextLight"
-                            app:layout_constraintBottom_toTopOf="@+id/key_mul"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:text="@string/key_div" />
-
-                        <com.jakode.calculator.CalculatorInputView
-                            android:id="@+id/key_mul"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:color_text="@color/colorTextLight"
-                            app:layout_constraintBottom_toTopOf="@+id/key_sub"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/key_div"
-                            app:text="@string/key_mul" />
-
-                        <com.jakode.calculator.CalculatorInputView
-                            android:id="@+id/key_sub"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:color_text="@color/colorTextLight"
-                            app:layout_constraintBottom_toTopOf="@+id/key_sum"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/key_mul"
-                            app:text="@string/key_sub" />
-
-                        <com.jakode.calculator.CalculatorInputView
-                            android:id="@+id/key_sum"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:color_text="@color/colorTextLight"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/key_sub"
-                            app:text="@string/key_sum" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <Button
-                        android:id="@+id/key_equal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_weight="4"
-                        android:background="@drawable/equals_background"
-                        android:text="@string/key_equals"
-                        android:textColor="@android:color/background_light"
-                        android:textSize="34sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <View
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="36dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/divider"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.16" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.15" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
