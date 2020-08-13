@@ -52,7 +52,7 @@ class CalculatorInputView(context: Context, attributeSet: AttributeSet?) :
                     input_element_click.apply {
                         val outValue = TypedValue()
                         context.theme.resolveAttribute(
-                            android.R.attr.selectableItemBackground,
+                            android.R.attr.selectableItemBackgroundBorderless,
                             outValue,
                             true
                         )
