@@ -2,6 +2,7 @@ package com.jakode.calculator
 
 import com.jakode.calculator.calculatorOutput.CalculatorOutputInterfaceView
 import com.jakode.calculator.calculatorOutput.CalculatorOutputPresenter
+import com.jakode.calculator.utils.Type
 import org.junit.Before
 import org.junit.Test
 import org.mockito.BDDMockito.then
@@ -22,17 +23,17 @@ class CalculateOutputTest {
     @Test
     fun `1 plus 1 is 2`() {
         // When a number is added
-        mmPresenter.add("1")
+        mmPresenter.add("1",Type.Number)
         // Then the correct equation should be set
         then(mmMockView).should().setEquation("1")
 
         // When a operators is added
-        mmPresenter.add("+")
+        mmPresenter.add("+",Type.Operator)
         // Then the correct equation should be set
         then(mmMockView).should().setEquation("1+")
 
         // When a number is added
-        mmPresenter.add("1")
+        mmPresenter.add("1",Type.Number)
         // Then the correct equation should be set
         then(mmMockView).should().setEquation("1+1")
 
@@ -43,27 +44,27 @@ class CalculateOutputTest {
     @Test
     fun `2 plus 2 minus 1 is 3`() {
         // When a number is added
-        mmPresenter.add("2")
+        mmPresenter.add("2",Type.Number)
         // Then the correct equation should be set
         then(mmMockView).should().setEquation("2")
 
         // When a operators is added
-        mmPresenter.add("+")
+        mmPresenter.add("+",Type.Operator)
         // Then the correct equation should be set
         then(mmMockView).should().setEquation("2+")
 
         // When a number is added
-        mmPresenter.add("2")
+        mmPresenter.add("2",Type.Number)
         // Then the correct equation should be set
         then(mmMockView).should().setEquation("2+2")
 
         // When a operators is added
-        mmPresenter.add("-")
+        mmPresenter.add("-",Type.Operator)
         // Then the correct equation should be set
         then(mmMockView).should().setEquation("2+2-")
 
         // When a number is added
-        mmPresenter.add("1")
+        mmPresenter.add("1",Type.Number)
         // Then the correct equation should be set
         then(mmMockView).should().setEquation("2+2-1")
 

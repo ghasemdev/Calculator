@@ -6,6 +6,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.jakode.calculator.R
+import com.jakode.calculator.utils.Type
 import kotlinx.android.synthetic.main.view_calculator_output.view.*
 
 class CalculatorOutputView(context: Context, attributeSet: AttributeSet?) :
@@ -19,7 +20,7 @@ class CalculatorOutputView(context: Context, attributeSet: AttributeSet?) :
         LayoutInflater.from(context).inflate(R.layout.view_calculator_output, this, true)
     }
 
-    fun addItem(item: String) = CalculatorOutputPresenter.add(item)
+    fun addItem(item: String, type: Type) = CalculatorOutputPresenter.add(item, type)
 
     fun removeItem() = CalculatorOutputPresenter.remove()
 
