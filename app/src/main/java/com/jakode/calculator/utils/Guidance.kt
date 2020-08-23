@@ -1,4 +1,4 @@
-package com.jakode.calculator
+package com.jakode.calculator.utils
 
 import android.app.Activity
 import android.content.Context
@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
+import com.jakode.calculator.R
 import com.takusemba.spotlight.OnSpotlightListener
 import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.Target
