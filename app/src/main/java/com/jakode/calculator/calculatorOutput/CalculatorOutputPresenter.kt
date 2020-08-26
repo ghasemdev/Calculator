@@ -25,58 +25,94 @@ object CalculatorOutputPresenter {
 
     fun add(item: String, type: Type) {
         if (type == Type.Number) { // When input is a number
-            if (mmCurrentEquation.isNotEmpty()) { // Second input and ...
-                // Control %2 , 000000 and 0.0000 Error
-                if (!isLastChar('%') && !isFirstCharZero() || (hasDot && isFirstCharZero()))
-                    mmCurrentEquation = mmCurrentEquation.plus(item)
-            } else { // First input
-                mmCurrentEquation = mmCurrentEquation.plus(item)
-            }
+            handelNum(item)
         } else { // When input is a operator
-            when {
-                item == "(" || item == "(-" -> { // Handel braces
-                    mmCurrentEquation =
-                        if (mmCurrentEquation.isNotEmpty()) { // Second input and ...
-                            // When last input is a operator or '(' add braces
-                            if (isLastCharOperator() || isLastChar('(')) {
-                                braces++
-                                mmCurrentEquation.plus(item)
-                            } else if (isLastChar(')') && braces == 0) { // After closed all braces add multiple open brace
-                                braces++
-                                mmCurrentEquation.plus("*$item")
-                            } else { // and when last input is a number we start closed brace
-                                braces--
-                                mmCurrentEquation.plus(")")
-                            }
-                        } else { // First input
-                            braces++
-                            mmCurrentEquation.plus(item)
-                        }
-                }
-                item == "." && !hasDot && !isDecimal() -> { // Handel dot
-                    mmCurrentEquation =
-                        if (mmCurrentEquation.isEmpty() || isLastCharOperator()) { // In first input or after the last operator
-                            mmCurrentEquation.plus("0.")
-                        } else { // Dot called between numbers
-                            mmCurrentEquation.plus(item)
-                        }
-                    hasDot = true // Use this value for handel duplicated dots '2.01.1' Error
-                }
-                mmCurrentEquation.isNotEmpty() && !(isLastChar('%') && item == "%") && item != "." -> { // Handel basic operator and percentage (%% Error)
-                    mmCurrentEquation =
-                        if (isLastCharOperator()) { // When second input is operator we can change them
-                            mmCurrentEquation.substring(0, mmCurrentEquation.length - 1).plus(item)
-                        } else { // First input operator
-                            mmCurrentEquation.plus(item)
-                        }
-                    hasDot = false
-                }
+            when (item) {
+                "(", "(-" -> handelBraces(item) // Handel braces
+                "." -> handelDot(item) // Handel dot
+                else -> handelOperator(item) // Handel basic operator and percentage
             }
         }
 
         updateEquation()
         calculateOutcome()
         updateOutcome()
+    }
+
+    private fun handelNum(item: String) {
+        if (mmCurrentEquation.isNotEmpty()) { // Second input and ...
+            if (isLastChar(')')) { // Control (5)5 Error
+                mmCurrentEquation = mmCurrentEquation.plus("*$item")
+            } else if (!isLastChar('%') && !isFirstCharZero() || (hasDot && isFirstCharZero())
+            ) { // Control 2%2 , 000000 Error
+                mmCurrentEquation = mmCurrentEquation.plus(item)
+            }
+        } else { // First input
+            mmCurrentEquation = mmCurrentEquation.plus(item)
+        }
+    }
+
+    private fun handelBraces(item: String) {
+        mmCurrentEquation =
+            if (mmCurrentEquation.isNotEmpty()) { // Second input and ...
+                if (!isLastChar('.')) { // control '.(5)' Error
+                    // When last input is a operator or '(' add braces
+                    if (isLastChar('+', '-', '*', '/', '(')) {
+                        braces++
+                        mmCurrentEquation.plus(item)
+                    } else if (isLastChar(
+                            ')', '%', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+                        ) && braces == 0
+                    ) { // After closed all braces, number and % add multiple open brace
+                        braces++
+                        mmCurrentEquation.plus("*$item")
+                    } else { // and when last input is a number we start closed brace
+                        braces--
+                        mmCurrentEquation.plus(")")
+                    }
+                } else {
+                    mmCurrentEquation
+                }
+            } else { // First input
+                braces++
+                mmCurrentEquation.plus(item)
+            }
+    }
+
+    private fun handelDot(item: String) {
+        if (!hasDot && !isDecimal()) { // Control '2.....' Error
+            mmCurrentEquation =
+                if (mmCurrentEquation.isEmpty() || isLastChar('+', '-', '*', '/', '(')
+                ) { // In first input or after the last operator
+                    mmCurrentEquation.plus("0.")
+                } else if (isLastChar(')', '%')) { // Control '(5)*0.' and '2%.' Error
+                    mmCurrentEquation.plus("*0.")
+                } else { // Dot called between numbers
+                    mmCurrentEquation.plus(item)
+                }
+            hasDot = true // Use this value for handel duplicated dots '2.01.1' Error}
+        }
+    }
+
+    private fun handelOperator(item: String) {
+        if (mmCurrentEquation.isNotEmpty() && !(isLastChar('%', '(') && item == "%")
+        ) { // Control '%%' and '(%' Error
+            mmCurrentEquation =
+                if (isLastChar('+', '-', '*', '/') && item != "%"
+                ) { // When second input is operator we can change them
+                    mmCurrentEquation.substring(0, mmCurrentEquation.length - 1).plus(item)
+                } else if (isLastChar('+', '-', '*', '/') && item == "%"
+                ) { // Control '2+%' and '2%+%' Error
+                    mmCurrentEquation
+                } else { // First input operator
+                    if (isLastChar('(') && (item == "/" || item == "*")) { // Control '(*2' and '(/2' Error
+                        mmCurrentEquation
+                    } else {
+                        mmCurrentEquation.plus(item)
+                    }
+                }
+            hasDot = false
+        }
     }
 
     fun remove() {
@@ -98,7 +134,7 @@ object CalculatorOutputPresenter {
 
     fun solve() {
         braces = 0
-        if (mmCurrentEquation.isNotEmpty() && !isDecimal()) {
+        if (mmCurrentEquation.isNotEmpty() && mmCurrentOutcome.isNotEmpty()) {
             mmCurrentEquation = mmCurrentOutcome
             mmCurrentOutcome = ""
         }
@@ -120,7 +156,13 @@ object CalculatorOutputPresenter {
     private fun calculateOutcome() {
         mmCurrentOutcome =
             if (mmCurrentEquation.isNotEmpty()) { // CurrentEquation should not empty
-                if (!isLastCharOperator() // Last character input should not operator
+                if (!isLastChar(
+                        '+',
+                        '-',
+                        '*',
+                        '/',
+                        '.'
+                    ) // Last character input should not operator
                     && braces == 0 // All braces should be closed
                 ) {
                     val e = Expression(mmCurrentEquation)
@@ -137,23 +179,14 @@ object CalculatorOutputPresenter {
     }
 
     /**
-     * Check the last character input is a operator
+     * Check the last character input
      * @return a boolean
      */
-    private fun isLastCharOperator(): Boolean {
+    private fun isLastChar(vararg chars: Char): Boolean {
         val len = mmCurrentEquation.length
 
-        if (mmCurrentEquation[len - 1] == '+' || mmCurrentEquation[len - 1] == '-' || mmCurrentEquation[len - 1] == '*' || mmCurrentEquation[len - 1] == '/' || mmCurrentEquation[len - 1] == '.') return true
+        for (char in chars) if (mmCurrentEquation[len - 1] == char) return true
         return false
-    }
-
-    /**
-     * Check the last character input
-     * @property char
-     * @return a boolean
-     */
-    private fun isLastChar(char: Char): Boolean {
-        return mmCurrentEquation[mmCurrentEquation.length - 1] == char
     }
 
     /**
